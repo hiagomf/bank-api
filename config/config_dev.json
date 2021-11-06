@@ -8,7 +8,7 @@
     "databases": [
         {
             "nick": "bank-api",
-            "name": "bank-api",
+            "name": "bank",
             "username": "postgres",
             "password": "dev1234",
             "hostname": "localhost",
@@ -21,7 +21,7 @@
         },
         {
             "nick": "bank-api",
-            "name": "bank-api",
+            "name": "bank",
             "username": "postgres",
             "password": "dev1234",
             "hostname": "localhost",
