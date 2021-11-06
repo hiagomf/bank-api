@@ -1,0 +1,41 @@
+{
+    "production": false,
+    "metrics": true,
+    "system_id": 1,
+    "secrets": [
+        "DEDC185C3EF4E353CBFFD7B884C3D"
+    ],
+    "databases": [
+        {
+            "nick": "bank-api",
+            "name": "bank-api",
+            "username": "postgres",
+            "password": "dev1234",
+            "hostname": "localhost",
+            "port": "5432",
+            "max_conn": 5,
+            "max_idle": 1,
+            "read_only": false,
+            "main": true,
+            "transaction_timeout": 1
+        },
+        {
+            "nick": "bank-api",
+            "name": "bank-api",
+            "username": "postgres",
+            "password": "dev1234",
+            "hostname": "localhost",
+            "port": "5432",
+            "max_conn": 5,
+            "max_idle": 1,
+            "read_only": true,
+            "main": false,
+            "transaction_timeout": 1
+        }
+    ],
+    "access_log_directory": "/var/log/bank-api/access.log",
+    "error_log_directory": "/var/log/bank-api/error.log",
+    "upload_directory": "/var/local/bank-api/upload",
+    "maximum_upload_size": 16777216,
+    "query_timeout": 1
+}
