@@ -7,4 +7,5 @@ import (
 
 func Router(r *gin.RouterGroup) {
 	bank.Router(r.Group("banks"))
+	bank.RouterID(r.Group("bank"))
 }

@@ -1,6 +1,9 @@
 package postgres
 
 import (
+	"database/sql"
+
+	"github.com/Masterminds/squirrel"
 	"github.com/hiagomf/bank-api/server/config/database"
 	"github.com/hiagomf/bank-api/server/infraestructure/records/bank"
 	"github.com/hiagomf/bank-api/server/oops"
@@ -9,6 +12,37 @@ import (
 
 type PGBank struct {
 	DB *database.DBTransaction
+}
+
+// SelectOne - busca um banco pelo ID
+func (pg *PGBank) SelectOne(id *int64) (res *bank.Bank, err error) {
+	res = new(bank.Bank)
+
+	if err = pg.DB.Builder.
+		Select(`
+			TB.id,
+			TB.created_at,
+			TB.updated_at,
+			TB.deleted_at,
+			TB.name
+		`).
+		From(`public.t_bank TB`).
+		Where(squirrel.Eq{
+			"TB.id": id,
+		}).
+		Scan(
+			&res.ID,
+			&res.CreatedAt,
+			&res.UpdatedAt,
+			&res.DeletedAt,
+			&res.Name,
+		); err != nil {
+		if err == sql.ErrNoRows {
+			return res, oops.NovoErr("banco não encontrado, digite um ID válido")
+		}
+		return res, oops.Err(err)
+	}
+	return
 }
 
 // SelectPaginated - retorna os bancos paginados de acordo com os parâmetros informados

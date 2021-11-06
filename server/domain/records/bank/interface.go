@@ -6,5 +6,6 @@ import (
 )
 
 type IBank interface {
+	SelectOne(id *int64) (res *bank.Bank, err error)
 	SelectPaginated(parameters *utils.ParametrosRequisicao) (res *bank.BankPag, err error)
 }
