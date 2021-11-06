@@ -17,6 +17,7 @@ func novoRepo(db *database.DBTransaction) *repository {
 	}
 }
 
+// SelectPaginated - retorna as agências paginadas de acordo com os parâmetros informados
 func (r *repository) SelectPaginated(parameters *utils.ParametrosRequisicao) (res *agency.AgencyPag, err error) {
 	return r.pg.SelectPaginated(parameters)
 }

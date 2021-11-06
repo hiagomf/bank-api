@@ -11,7 +11,7 @@ type PGAgency struct {
 	DB *database.DBTransaction
 }
 
-// SelectPaginated - retorna os bancos paginados de acordo com os parâmetros informados
+// SelectPaginated - retorna as agências paginadas de acordo com os parâmetros informados
 func (pg *PGAgency) SelectPaginated(parameters *utils.ParametrosRequisicao) (res *agency.AgencyPag, err error) {
 	var agencymodel agency.Agency
 	res = new(agency.AgencyPag)
