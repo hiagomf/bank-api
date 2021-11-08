@@ -30,6 +30,18 @@ CREATE TABLE IF NOT EXISTS public.t_agency (
 );
 ALTER TABLE public.t_agency ADD CONSTRAINT fk_bank_id FOREIGN KEY (bank_id) REFERENCES public.t_bank(id);
 
+CREATE TABLE IF NOT EXISTS public.t_account_owner(
+	id SERIAL NOT NULL PRIMARY KEY,
+	created_at TIMESTAMP NOT NULL DEFAULT 'NOW()',
+	updated_at INTEGER,
+	deleted_at TIMESTAMP,
+	"name" VARCHAR(255) NOT NULL,
+	"document" VARCHAR(11) NOT NULL,
+	birth_date TIMESTAMP NOT NULL,
+	father_name VARCHAR(255) NOT NULL,
+	mother_name VARCHAR(255) NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS public.t_account_owner_address(
 	id SERIAL NOT NULL PRIMARY KEY,
 	created_at TIMESTAMP NOT NULL DEFAULT 'NOW()',
@@ -42,22 +54,10 @@ CREATE TABLE IF NOT EXISTS public.t_account_owner_address(
 	district VARCHAR(45) NOT NULL,
 	city VARCHAR(45) NOT NULL,
 	state VARCHAR(2) NOT NULL,
-	country VARCHAR(45) NOT NULL
+	country VARCHAR(45) NOT NULL,
+	account_owner_id BIGINT NOT NULL
 );
-
-CREATE TABLE IF NOT EXISTS public.t_account_owner(
-	id SERIAL NOT NULL PRIMARY KEY,
-	created_at TIMESTAMP NOT NULL DEFAULT 'NOW()',
-	updated_at INTEGER,
-	deleted_at TIMESTAMP,
-	"name" VARCHAR(255) NOT NULL,
-	"document" VARCHAR(11) NOT NULL,
-	birth_date TIMESTAMP NOT NULL,
-	father_name VARCHAR(255) NOT NULL,
-	mother_name VARCHAR(255) NOT NULL,
-	account_owner_address_id BIGINT NOT NULL
-);
-ALTER TABLE public.t_account_owner ADD CONSTRAINT fk_owner_address FOREIGN KEY (account_owner_address_id) REFERENCES public.t_account_owner_address(id);
+ALTER TABLE public.t_account_owner_address ADD CONSTRAINT fk_account_owner FOREIGN KEY (account_owner_id) REFERENCES public.t_account_owner(id);
 
 --DROP TABLE IF EXISTS t_account;
 CREATE TABLE IF NOT EXISTS public.t_account(
@@ -67,11 +67,12 @@ CREATE TABLE IF NOT EXISTS public.t_account(
 	deleted_at TIMESTAMP,
 	"number" INTEGER NOT NULL,
 	"verifying_digit" INTEGER NOT NULL,
+	agency_id BIGINT NOT NULL,
 	account_owner_id BIGINT NOT NULL,
 	"password" VARCHAR(255) NOT NULL
 );
 ALTER TABLE public.t_account ADD CONSTRAINT fk_account_owner_id FOREIGN KEY (account_owner_id) REFERENCES public.t_account_owner(id);
-
+ALTER TABLE public.t_account ADD CONSTRAINT fk_agency_id FOREIGN KEY (agency_id) REFERENCES public.t_agency(id);
 
 INSERT INTO public.t_bank (id,created_at,updated_at,deleted_at,"name",code) VALUES (1,NOW(),NULL,NULL,'inBolso',234);
 
