@@ -15,7 +15,7 @@ type AccountDetail struct {
 }
 
 type Access struct {
-	AccountNumber  *int64  `sql:"account_number" conversorTag:"number"`
+	AccountNumber  *int64  `sql:"account_number" conversorTag:"account_number"`
 	VerifyingDigit *int64  `sql:"verifying_digit" conversorTag:"verifying_digit"`
 	AgencyCode     *int64  `sql:"agency_code" conversorTag:"agency_code"`
 	Password       *string `sql:"password" conversorTag:"password"`

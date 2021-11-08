@@ -30,6 +30,10 @@ func (r *repository) GetDataInfra() (res *account_detail.AccountDetail) {
 	return new(account_detail.AccountDetail)
 }
 
+func (r *repository) GetAccessInfra() (res *account_detail.Access) {
+	return new(account_detail.Access)
+}
+
 // ConvertToInfra - realiza a conversão de alguma model informada para model de infraestructure
 func (r *repository) ConvertAcessToInfra(data interface{}) (res *account_detail.Access, err error) {
 	res = &account_detail.Access{}

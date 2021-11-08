@@ -3,7 +3,7 @@ package account_detail
 import "time"
 
 type Request struct {
-	AccountNumber  *int64  `json:"account_number" binding:"required" conversorTag:"number"`
+	AccountNumber  *int64  `json:"account_number" binding:"required" conversorTag:"account_number"`
 	VerifyingDigit *int64  `json:"verifying_digit" binding:"required" conversorTag:"verifying_digit"`
 	AgencyCode     *int64  `json:"agency_code" binding:"required" conversorTag:"agency_code"`
 	Password       *string `json:"password" binding:"required" conversorTag:"password"`

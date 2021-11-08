@@ -115,8 +115,10 @@ func (pg *PGAccount) SelectPaginated(parameters *utils.ParametrosRequisicao) (re
 
 	// Definindo filtros que poderão ser utilizados na consulta
 	whereClause := parameters.CriarFiltros(preQuery, map[string]utils.Filtro{
-		"not_in_id": utils.CriarFiltros("TA.id", utils.FlagFiltroNotIn),
-		"deleted":   utils.CriarFiltros("(TA.deleted_at IS NOT NULL) = ?::BOOL", utils.FlagFiltroEq),
+		"not_in_id":        utils.CriarFiltros("TA.id", utils.FlagFiltroNotIn),
+		"deleted":          utils.CriarFiltros("(TA.deleted_at IS NOT NULL) = ?::BOOL", utils.FlagFiltroEq),
+		"account_owner_id": utils.CriarFiltros("TA.account_owner_id = ?", utils.FlagFiltroEq),
+		"agency_id":        utils.CriarFiltros("TA.agency_id = ?", utils.FlagFiltroEq),
 	})
 
 	data, next, total, err := utils.ConfigurarPaginacao(parameters, &occurrenceModel, &whereClause)
