@@ -10,7 +10,7 @@ type PGAccountTransaction struct {
 	DB *database.DBTransaction
 }
 
-func (pg *PGAccountTransaction) Deposit(id *int64, value *float64) (err error) {
+func (pg *PGAccountTransaction) UpdateValue(id *int64, value *float64) (err error) {
 
 	if err = pg.DB.Builder.
 		Update(`t_account_detail`).

@@ -15,7 +15,7 @@ func novoRepo(db *database.DBTransaction) *repository {
 	}
 }
 
-// Deposit - deposita determinado valor na conta
-func (r *repository) Deposit(id *int64, value *float64) (err error) {
-	return r.pg.Deposit(id, value)
+// UpdateValue - altera determinado valor na conta
+func (r *repository) UpdateValue(id *int64, value *float64) (err error) {
+	return r.pg.UpdateValue(id, value)
 }
