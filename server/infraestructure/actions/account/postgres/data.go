@@ -5,7 +5,7 @@ import (
 
 	"github.com/Masterminds/squirrel"
 	"github.com/hiagomf/bank-api/server/config/database"
-	"github.com/hiagomf/bank-api/server/infraestructure/records/account"
+	"github.com/hiagomf/bank-api/server/infraestructure/actions/account"
 	"github.com/hiagomf/bank-api/server/oops"
 	"github.com/hiagomf/bank-api/server/utils"
 )
@@ -29,8 +29,8 @@ func (pg *PGAccount) Insert(data *account.Account) (err error) {
 	if err = pg.DB.Builder.
 		Insert("public.t_account").
 		SetMap(valores).
-		Suffix(`RETURNING id`).
-		Scan(&data.ID); err != nil {
+		Suffix(`RETURNING "id", "number", "verifying_digit"`).
+		Scan(&data.ID, &data.Number, &data.VerifyingDigit); err != nil {
 		return oops.Err(err)
 	}
 	return
@@ -64,7 +64,7 @@ func (pg *PGAccount) Update(data *account.Account) (err error) {
 }
 
 // SelectOne - realiza a busca de uma ocorrência no banco
-func (pg *PGAccount) SelectOne(id *string) (res *account.Account, err error) {
+func (pg *PGAccount) SelectOne(id *int64) (res *account.Account, err error) {
 	res = new(account.Account)
 
 	if err = pg.DB.Builder.
@@ -129,7 +129,7 @@ func (pg *PGAccount) SelectPaginated(parameters *utils.ParametrosRequisicao) (re
 }
 
 // Disable realiza o soft delete no banco do registro informado
-func (pg *PGAccount) Disable(id *string) (err error) {
+func (pg *PGAccount) Disable(id *int64) (err error) {
 	if err = pg.DB.Builder.
 		Update("public.t_account").
 		Set("deleted_at", squirrel.Expr("NOW()")).

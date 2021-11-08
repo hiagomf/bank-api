@@ -21,3 +21,8 @@ func novoRepo(db *database.DBTransaction) *repository {
 func (r *repository) SelectPaginated(parameters *utils.ParametrosRequisicao) (res *agency.AgencyPag, err error) {
 	return r.pg.SelectPaginated(parameters)
 }
+
+// SelectOne - retorna a agência de ID informado
+func (r *repository) SelectOne(id *int64) (res *agency.Agency, err error) {
+	return r.pg.SelectOne(id)
+}

@@ -1,6 +1,9 @@
 package postgres
 
 import (
+	"database/sql"
+
+	"github.com/Masterminds/squirrel"
 	"github.com/hiagomf/bank-api/server/config/database"
 	"github.com/hiagomf/bank-api/server/infraestructure/records/agency"
 	"github.com/hiagomf/bank-api/server/oops"
@@ -39,5 +42,56 @@ func (pg *PGAgency) SelectPaginated(parameters *utils.ParametrosRequisicao) (res
 	}
 
 	res.Data, res.Next, res.Total = data.([]agency.Agency), next, total
+	return
+}
+
+// SelectOne - realiza a busca de uma agência no banco
+func (pg *PGAgency) SelectOne(id *int64) (res *agency.Agency, err error) {
+	res = new(agency.Agency)
+
+	if err = pg.DB.Builder.
+		Select(`
+			TA.id,
+			TA.created_at,
+			TA.updated_at,
+			TA.deleted_at,
+			TA.bank_id,
+			TA.code,
+			TA.main_agency,
+			TA.zip_code,
+			TA.public_place,
+			TA.number,
+			TA.complement,
+			TA.district,
+			TA.city,
+			TA.state,
+			TA.country
+		`).
+		From(`public.t_agency TA`).
+		Where(squirrel.Eq{
+			"TA.id": id,
+		}).
+		Scan(
+			&res.ID,
+			&res.CreatedAt,
+			&res.UpdatedAt,
+			&res.DeletedAt,
+			&res.BankID,
+			&res.Code,
+			&res.MainAgency,
+			&res.ZipCode,
+			&res.PublicPlace,
+			&res.Number,
+			&res.Complement,
+			&res.District,
+			&res.City,
+			&res.State,
+			&res.Country,
+		); err != nil {
+		if err == sql.ErrNoRows {
+			return res, oops.NovoErr("agência não encontrada")
+		}
+		return res, oops.Err(err)
+	}
 	return
 }

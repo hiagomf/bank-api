@@ -9,6 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/hiagomf/bank-api/server/config"
 	"github.com/hiagomf/bank-api/server/config/database"
+	"github.com/hiagomf/bank-api/server/interface/actions"
 	"github.com/hiagomf/bank-api/server/interface/records"
 	"github.com/hiagomf/bank-api/server/logger"
 	"github.com/hiagomf/bank-api/server/middleware"
@@ -75,7 +76,7 @@ func externalRouter(logg *zap.Logger) http.Handler {
 	v1 := r.Group("v1")
 
 	records.Router(v1.Group("records"))
-	// actions.Router(v1.Group("actions"))
+	actions.Router(v1.Group("actions"))
 
 	return r
 }

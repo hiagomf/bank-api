@@ -7,4 +7,5 @@ import (
 
 type IAgency interface {
 	SelectPaginated(parameters *utils.ParametrosRequisicao) (res *agency.AgencyPag, err error)
+	SelectOne(id *int64) (res *agency.Agency, err error)
 }
