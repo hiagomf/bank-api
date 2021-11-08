@@ -63,7 +63,7 @@ func (pg *PGAccountOwnerAddress) Update(data *account_owner_address.AccountOwner
 	return
 }
 
-// SelectOne - realiza a busca de uma ocorrência no banco
+// SelectOne - realiza a busca de um endereço de titular de conta no banco
 func (pg *PGAccountOwnerAddress) SelectOne(id *int64) (res *account_owner_address.AccountOwnerAddress, err error) {
 	res = new(account_owner_address.AccountOwnerAddress)
 
@@ -105,7 +105,7 @@ func (pg *PGAccountOwnerAddress) SelectOne(id *int64) (res *account_owner_addres
 	return
 }
 
-// SelectPaginated - realiza a busca paginada de tipos de ocorrências no banco
+// SelectPaginated - realiza a busca paginada endereços de titular de conta
 func (pg *PGAccountOwnerAddress) SelectPaginated(parameters *utils.ParametrosRequisicao) (res *account_owner_address.AccountOwnerAddressPag, err error) {
 	var occurrenceModel account_owner_address.AccountOwnerAddress
 	res = new(account_owner_address.AccountOwnerAddressPag)

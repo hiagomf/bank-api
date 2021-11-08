@@ -10,7 +10,7 @@ import (
 	"github.com/hiagomf/bank-api/server/utils"
 )
 
-// Deposit - deposita no saldo da conta
+// Deposit - realza o depósito de saldo na conta
 func Deposit(ctx context.Context, req *DepositRequest) (err error) {
 	var msgErrorDefault = "Erro ao buscar detalhes de conta"
 
@@ -34,6 +34,7 @@ func Deposit(ctx context.Context, req *DepositRequest) (err error) {
 		return oops.Wrap(err, msgErrorDefault)
 	}
 
+	// Somando valor antigo com o valor a ser depositado e atualizando
 	newValue := *detailData.Balance + *req.Value
 	if err = transactionRepo.UpdateValue(detailData.ID, &newValue); err != nil {
 		return oops.Wrap(err, msgErrorDefault)
@@ -46,6 +47,7 @@ func Deposit(ctx context.Context, req *DepositRequest) (err error) {
 	return
 }
 
+// Transfer - realiza a transferência bancária entre contas
 func Transfer(ctx context.Context, req *TransferRequest) (err error) {
 	var msgErrorDefault = "Erro ao buscar detalhes de conta"
 

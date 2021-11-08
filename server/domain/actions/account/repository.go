@@ -18,22 +18,27 @@ func novoRepo(db *database.DBTransaction) *repository {
 	}
 }
 
+// Insert - insere uma conta
 func (r *repository) Insert(data *account.Account) (err error) {
 	return r.pg.Insert(data)
 }
 
+// Update - atualiza uma conta
 func (r *repository) Update(data *account.Account) (err error) {
 	return r.pg.Update(data)
 }
 
+// SelectOne - busca uma conta
 func (r *repository) SelectOne(id *int64) (res *account.Account, err error) {
 	return r.pg.SelectOne(id)
 }
 
+// SelectPaginated - realiza uma busca paginada
 func (r *repository) SelectPaginated(parameters *utils.ParametrosRequisicao) (res *account.AccountPag, err error) {
 	return r.pg.SelectPaginated(parameters)
 }
 
+// Disable - desabilita uma conta
 func (r *repository) Disable(id *int64) (err error) {
 	return r.pg.Disable(id)
 }

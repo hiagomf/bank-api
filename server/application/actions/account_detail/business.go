@@ -9,7 +9,7 @@ import (
 	"github.com/hiagomf/bank-api/server/utils"
 )
 
-// CheckDetails - verifica o saldo da conta
+// CheckDetails - verifica os detalhes da conta, inclusive o saldo
 func CheckDetails(ctx context.Context, req *Request) (res *Response, err error) {
 	var msgErrorDefault = "Erro ao buscar detalhes de conta"
 	res = new(Response)

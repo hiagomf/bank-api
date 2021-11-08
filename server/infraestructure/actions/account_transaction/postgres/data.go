@@ -10,6 +10,7 @@ type PGAccountTransaction struct {
 	DB *database.DBTransaction
 }
 
+// UpdateValue - altera o valor contido na conta
 func (pg *PGAccountTransaction) UpdateValue(id *int64, value *float64) (err error) {
 
 	if err = pg.DB.Builder.

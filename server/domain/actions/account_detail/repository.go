@@ -18,18 +18,22 @@ func novoRepo(db *database.DBTransaction) *repository {
 	}
 }
 
+// Insert - insere um detalhe de conta
 func (r *repository) Insert(data *account_detail.AccountDetail) (err error) {
 	return r.pg.Insert(data)
 }
 
+// GetAccountDetail - realiza a busca de detalhes de conta, trazendo também a senha para verificação
 func (r *repository) GetAccountDetail(data *account_detail.Access) (res *account_detail.AccountDetail, err error) {
 	return r.pg.GetAccountDetail(data)
 }
 
+// GetDataInfra retorna a model de infra para não ferir o DDD
 func (r *repository) GetDataInfra() (res *account_detail.AccountDetail) {
 	return new(account_detail.AccountDetail)
 }
 
+// GetDataInfra retorna a model de infra para não ferir o DDD
 func (r *repository) GetAccessInfra() (res *account_detail.Access) {
 	return new(account_detail.Access)
 }

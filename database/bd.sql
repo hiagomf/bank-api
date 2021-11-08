@@ -86,21 +86,6 @@ CREATE TABLE IF NOT EXISTS public.t_account_detail(
 );
 ALTER TABLE public.t_account_detail ADD CONSTRAINT fk_account_id FOREIGN KEY (account_id) REFERENCES public.t_account(id);
 
---DROP TABLE IF EXISTS t_account_detail;
-CREATE TABLE IF NOT EXISTS public.t_account_transaction_log(
-	id SERIAL NOT NULL PRIMARY KEY,
-	created_at TIMESTAMP NOT NULL DEFAULT 'NOW()',
-	from_account_id BIGINT NOT NULL,
-	from_account_old_balance FLOAT NOT NULL,
-	from_account_new_balance FLOAT NOT NULL,
-	to_account_id BIGINT NOT NULL,
-	to_account_old_balance FLOAT NOT NULL,
-	to_account_new_balance FLOAT NOT NULL,
-	transaction_value FLOAT NOT NULL
-);
-ALTER TABLE public.t_account_transaction_log ADD CONSTRAINT fk_from_account_id FOREIGN KEY (from_account_id) REFERENCES public.t_account(id);
-ALTER TABLE public.t_account_transaction_log ADD CONSTRAINT fk_to_account_id FOREIGN KEY (to_account_id) REFERENCES public.t_account(id);
-
 INSERT INTO public.t_bank (id,created_at,updated_at,deleted_at,"name",code) VALUES (1,NOW(),NULL,NULL,'inBolso',234);
 INSERT INTO public.t_agency (id,created_at,updated_at,deleted_at,bank_id,main_agency,zip_code,public_place,"number",complement,district,city,state,country,code) VALUES
 	 (1,'2021-11-05 22:57:19.044',NULL,NULL,1,true,'63020060','Rua Santa Isabel','1631','PRÉDIO COMERCIAL','FRANCISCANOS','JUAZEIRO DO NORTE','CE','BRASIL',1),

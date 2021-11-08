@@ -36,6 +36,7 @@ func (pg *PGAccountDetail) Insert(data *account_detail.AccountDetail) (err error
 	return
 }
 
+// GetAccountDetail - busca detalhes da conta com base ns dados informados
 func (pg *PGAccountDetail) GetAccountDetail(data *account_detail.Access) (res *account_detail.AccountDetail, err error) {
 	res = new(account_detail.AccountDetail)
 
