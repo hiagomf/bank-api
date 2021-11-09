@@ -1,0 +1,36 @@
+services:
+  server:
+    build:
+      context: server/
+      dockerfile: Dockerfile
+    ports:
+      - '8180:8081' #autenticada
+      - '8181:8082' #sem-autenticacao
+    depends_on:
+      - postgres_server   
+    networks:
+      - default
+    volumes:
+      - /var/log/bank-api:/var/log/bank-api
+      - /etc/bank-api:/etc/bank-api
+  
+  postgres_server:
+    build:
+      context: database/
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_PASSWORD=dev1234
+    ports:
+      - '5432:5432'
+    volumes:
+      - database_postgres:/var/lib/postgresql/data
+    networks:
+      - default
+
+volumes:
+  api:
+  database_postgres:
+
+# networks:
+#   connect_net:
+#     driver: bridge
