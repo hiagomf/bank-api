@@ -149,7 +149,7 @@ func SelectOne(ctx context.Context, id *int64) (res *Response, err error) {
 
 // SelectPaginated - buscar titulares de conta com base nos query params informados paginados
 func SelectPaginated(ctx context.Context, params *utils.ParametrosRequisicao) (res *ResponsePag, err error) {
-	var msgErrorDefault = "Erro ao buscar ocorrências paginadas"
+	var msgErrorDefault = "Erro ao buscar titulares paginados"
 
 	res = new(ResponsePag)
 	tx, err := database.NewTransaction(ctx, true)
@@ -177,7 +177,7 @@ func SelectPaginated(ctx context.Context, params *utils.ParametrosRequisicao) (r
 
 // Disable - desativa um titular de conta com base no ID informado
 func Disable(ctx context.Context, id *int64) (err error) {
-	var msgErrorDefault = "Erro ao desativar conta"
+	var msgErrorDefault = "Erro ao desativar titular de conta"
 
 	tx, err := database.NewTransaction(ctx, false)
 	if err != nil {
@@ -185,7 +185,7 @@ func Disable(ctx context.Context, id *int64) (err error) {
 	}
 	defer tx.Rollback()
 
-	// desabilitando conta
+	// desabilitando titular
 	if err = account_owner.GetRepository(tx).Disable(id); err != nil {
 		return oops.Wrap(err, msgErrorDefault)
 	}

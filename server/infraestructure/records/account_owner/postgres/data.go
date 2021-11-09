@@ -2,6 +2,7 @@ package postgres
 
 import (
 	"database/sql"
+	"log"
 
 	"github.com/Masterminds/squirrel"
 	"github.com/hiagomf/bank-api/server/config/database"
@@ -47,6 +48,15 @@ func (pg *PGAccountOwner) Update(data *account_owner.AccountOwner) (err error) {
 	for indice, elemento := range cols {
 		valores[elemento] = vals[indice]
 	}
+
+	log.Println(pg.DB.Builder.
+		Update("t_account_owner").
+		SetMap(valores).
+		Where(squirrel.Eq{
+			"id":         data.ID,
+			"deleted_at": nil,
+		}).
+		Suffix(`RETURNING "id"`).ToSql())
 
 	if err = pg.DB.Builder.
 		Update("t_account_owner").

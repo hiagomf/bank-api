@@ -12,7 +12,7 @@ import (
 
 // Deposit - realza o depósito de saldo na conta
 func Deposit(ctx context.Context, req *DepositRequest) (err error) {
-	var msgErrorDefault = "Erro ao buscar detalhes de conta"
+	var msgErrorDefault = "Erro ao depositar valor"
 
 	tx, err := database.NewTransaction(ctx, false)
 	if err != nil {
@@ -49,7 +49,7 @@ func Deposit(ctx context.Context, req *DepositRequest) (err error) {
 
 // Transfer - realiza a transferência bancária entre contas
 func Transfer(ctx context.Context, req *TransferRequest) (err error) {
-	var msgErrorDefault = "Erro ao buscar detalhes de conta"
+	var msgErrorDefault = "Erro ao transferir valor"
 
 	tx, err := database.NewTransaction(ctx, false)
 	if err != nil {

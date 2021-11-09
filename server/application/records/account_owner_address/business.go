@@ -14,7 +14,7 @@ import (
 
 // Insert - insere um endereço relacionado a um titula, desabilitando os antigos já cadastrados
 func Insert(ctx context.Context, req *Request) (id *int64, err error) {
-	var msgErrorDefault = "Erro ao inserir titular de conta"
+	var msgErrorDefault = "Erro ao inserir endereço de titular de conta"
 
 	tx, err := database.NewTransaction(ctx, false)
 	if err != nil {
@@ -83,7 +83,7 @@ func Insert(ctx context.Context, req *Request) (id *int64, err error) {
 
 // Update - altera um titular de conta
 func Update(ctx context.Context, req *Request, id *int64) (err error) {
-	var msgErrorDefault = "Erro ao alterar titular de conta"
+	var msgErrorDefault = "Erro ao alterar endereço de titular de conta"
 
 	tx, err := database.NewTransaction(ctx, false)
 	if err != nil {
@@ -146,7 +146,7 @@ func Update(ctx context.Context, req *Request, id *int64) (err error) {
 
 // SelectOne - busca um tipo de titular de conta com base no ID informado
 func SelectOne(ctx context.Context, id *int64) (res *Response, err error) {
-	var msgErrorDefault = "Erro ao buscar titular de conta"
+	var msgErrorDefault = "Erro ao buscar endereço de titular de conta"
 	res = new(Response)
 
 	tx, err := database.NewTransaction(ctx, true)
@@ -170,7 +170,7 @@ func SelectOne(ctx context.Context, id *int64) (res *Response, err error) {
 
 // SelectPaginated - buscar titulares de conta com base nos query params informados paginados
 func SelectPaginated(ctx context.Context, params *utils.ParametrosRequisicao) (res *ResponsePag, err error) {
-	var msgErrorDefault = "Erro ao buscar ocorrências paginadas"
+	var msgErrorDefault = "Erro ao buscar endereço de titular de conta"
 
 	res = new(ResponsePag)
 	tx, err := database.NewTransaction(ctx, true)
@@ -198,7 +198,7 @@ func SelectPaginated(ctx context.Context, params *utils.ParametrosRequisicao) (r
 
 // Disable - desativa um titular de conta com base no ID informado
 func Disable(ctx context.Context, id *int64) (err error) {
-	var msgErrorDefault = "Erro ao desativar conta"
+	var msgErrorDefault = "Erro ao desativar  endereço de titular de conta"
 
 	tx, err := database.NewTransaction(ctx, false)
 	if err != nil {

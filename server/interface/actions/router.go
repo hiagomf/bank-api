@@ -5,6 +5,7 @@ import (
 	"github.com/hiagomf/bank-api/server/interface/actions/account"
 	"github.com/hiagomf/bank-api/server/interface/actions/account_detail"
 	"github.com/hiagomf/bank-api/server/interface/actions/account_transaction"
+	"github.com/hiagomf/bank-api/server/interface/actions/payment_slip"
 )
 
 func Router(r *gin.RouterGroup) {
@@ -14,4 +15,6 @@ func Router(r *gin.RouterGroup) {
 	account_detail.Router(r.Group("account_detail"))
 
 	account_transaction.Router(r.Group("account_transactions"))
+
+	payment_slip.Router(r.Group("payment_slips"))
 }

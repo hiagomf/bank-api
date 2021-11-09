@@ -24,7 +24,8 @@ func (pg *PGBank) SelectOne(id *int64) (res *bank.Bank, err error) {
 			TB.created_at,
 			TB.updated_at,
 			TB.deleted_at,
-			TB.name
+			TB.name,
+			TB.code
 		`).
 		From(`public.t_bank TB`).
 		Where(squirrel.Eq{
@@ -36,6 +37,7 @@ func (pg *PGBank) SelectOne(id *int64) (res *bank.Bank, err error) {
 			&res.UpdatedAt,
 			&res.DeletedAt,
 			&res.Name,
+			&res.Code,
 		); err != nil {
 		if err == sql.ErrNoRows {
 			return res, oops.NovoErr("banco não encontrado, digite um ID válido")
